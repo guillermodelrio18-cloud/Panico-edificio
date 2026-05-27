@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <title>Pánico Edificio</title>
+  <meta name="theme-color" content="#922B21"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Pánico"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="apple-touch-icon" href="/icons/icon-192.png"/>
+  <link rel="icon" href="/icons/icon-192.png"/>
+  <link rel="stylesheet" href="/css/app.css"/>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="screen-login">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-dot"></div>
+      <h1>Pánico Edificio</h1>
+      <p>Sistema de Alerta de Emergencia</p>
+    </div>
+    <form id="form-login">
+      <div class="form-group">
+        <label for="inp-user">Usuario</label>
+        <input id="inp-user" type="text" autocomplete="username" placeholder="vigilante" required/>
+      </div>
+      <div class="form-group">
+        <label for="inp-pass">Contraseña</label>
+        <input id="inp-pass" type="password" autocomplete="current-password" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn-login">Ingresar</button>
+    </form>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="screen-app" style="display:none">
+
+  <header class="app-header">
+    <div class="hdr-brand">
+      <div class="hdr-dot"></div>
+      <div>
+        <div class="hdr-title">Pánico Edificio</div>
+        <div class="hdr-sub" id="lbl-rol">Vigilante</div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-reloj" id="reloj">00:00:00</div>
+      <div class="hdr-user" id="lbl-user"></div>
+      <button class="btn-logout" id="btn-logout">Salir</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="vigilante">🛡 Vigilante</button>
+    <button class="tab-btn" data-tab="historial">📋 Historial</button>
+    <button class="tab-btn" data-tab="admin" id="tab-admin" style="display:none">⚙️ Admin</button>
+  </nav>
+
+  <!-- PANEL VIGILANTE -->
+  <div class="tab-panel active" id="panel-vigilante">
+    <div class="status-bar normal" id="status-bar">
+      <div class="status-dot"></div>
+      <span id="status-txt">Sistema operativo</span>
+    </div>
+
+    <div class="tipos-grid">
+      <div class="tipo-card" data-tipo="incendio">
+        <span class="tipo-emoji">🔥</span>
+        <div class="tipo-nombre">Incendio</div>
+      </div>
+      <div class="tipo-card" data-tipo="general">
+        <span class="tipo-emoji">⚠️</span>
+        <div class="tipo-nombre">Alerta</div>
+      </div>
+      <div class="tipo-card" data-tipo="evacuacion">
+        <span class="tipo-emoji">🚨</span>
+        <div class="tipo-nombre">Evacuación</div>
+      </div>
+    </div>
+
+    <p class="lbl-tipo" id="lbl-tipo">Seleccione el tipo de alerta</p>
+    <button id="btn-enviar" disabled>🔔 ENVIAR ALERTA</button>
+
+    <div class="push-row">
+      <span><strong id="lbl-total">0</strong> dispositivos registrados</span>
+      <button class="btn-push" id="btn-push">+ Activar aquí</button>
+    </div>
+  </div>
+
+  <!-- PANEL HISTORIAL -->
+  <div class="tab-panel" id="panel-historial">
+    <div class="sec-title" style="margin-bottom:14px">Alertas recientes</div>
+    <div id="historial-lista"><p class="vacío">Sin alertas registradas</p></div>
+  </div>
+
+  <!-- PANEL ADMIN -->
+  <div class="tab-panel" id="panel-admin">
+    <div class="sec-header">
+      <div class="sec-title">Propietarios</div>
+      <div class="sec-count" id="lbl-total-prop">0</div>
+    </div>
+    <div id="lista-propietarios"></div>
+
+    <div class="add-form">
+      <h4>+ Agregar propietario</h4>
+      <form id="form-prop">
+        <div class="grid2">
+          <input id="inp-nombre" type="text" placeholder="Nombre completo" required/>
+          <input id="inp-apto"   type="text" placeholder="Apto (ej. 301)" required/>
+        </div>
+        <input id="inp-tel"   type="tel"   placeholder="Teléfono (opcional)"/>
+        <input id="inp-email" type="email" placeholder="Correo (opcional)"/>
+        <button type="submit" class="btn-agregar">Agregar</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL CONFIRMACIÓN -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-ico">🚨</div>
+    <h3>Confirmar alerta</h3>
+    <p>Se enviará una alerta de <strong id="modal-tipo"></strong> a todos los dispositivos registrados.</p>
+    <div class="modal-btns">
+      <button class="btn-cancel2" id="btn-cancelar">Cancelar</button>
+      <button class="btn-ok" id="btn-confirmar">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/push.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
