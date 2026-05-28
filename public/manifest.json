@@ -4,10 +4,11 @@
   "description": "Sistema de alertas de emergencia",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a1a18",
+  "background_color": "#922B21",
   "theme_color": "#922B21",
   "orientation": "portrait",
   "icons": [
+    { "src": "/icons/icon-72.png",  "sizes": "72x72",   "type": "image/png" },
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
